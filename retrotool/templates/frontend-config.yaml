@@ -1,0 +1,10 @@
+{{- if eq .Values.type "gke" }}
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: {{ .Release.Name }}-frontend-config
+spec:
+  {{- if .Values.certificate.sslPolicy }}
+  sslPolicy: {{ .Values.certificate.sslPolicy }}
+  {{- end }}
+{{- end }}

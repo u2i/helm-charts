@@ -1,0 +1,44 @@
+{{- if and .Values.backup.enabled .Values.backup.hourly }}
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: {{ .Release.Name }}-backup-hourly-schedule
+  namespace: velero
+spec:
+  schedule: 55 */3 * * *
+  template:
+    includedNamespaces:
+      - {{ .Release.Namespace }}
+    includeClusterResources: true
+    snapshotVolumes: true
+    storageLocation: {{ .Values.backup.storageLocation }}
+    volumeSnapshotLocations:
+      - {{ .Values.backup.storageLocation }}
+    ttl: 24h0m0s
+    hooks:
+      resources:
+        - name: lock-filesystem
+          includedNamespaces:
+            - {{ .Release.Namespace }}
+          labelSelector:
+            matchLabels:
+              app: mongodb-replicaset
+              statefulset.kubernetes.io/pod-name: {{ .Release.Namespace }}-mongodb-replicaset-0
+          pre:
+            - exec:
+                container: mongodb-replicaset
+                command:
+                  - mongo
+                  - --eval
+                  - "rs.stepDown(); db.fsyncLock()"
+                timeout: 5m
+          post:
+            - exec:
+                container: mongodb-replicaset
+                command:
+                  - mongo
+                  - --eval
+                  - "db.fsyncUnlock()"
+                onError: Continue
+                timeout: 15m
+{{- end }}

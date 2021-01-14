@@ -1,0 +1,15 @@
+{{- if eq .Values.type "gke" }}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: {{ .Release.Name }}-backend-config
+spec:
+  timeoutSec: 1800
+  sessionAffinity:
+    affinityType: NONE
+  connectionDraining:
+    drainingTimeoutSec: 60
+  cdn:
+    enabled: {{ .Values.cdn.enabled }}
+    cachePolicy: {{ toYaml .Values.cdn.policy | nindent 6 }}
+{{- end }}

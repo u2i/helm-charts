@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name | trunc 31 | trimSuffix "-" }}-ingress
+  labels:
+    app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}
+    helm.sh/chart: {{ include "retrotool-chart.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  annotations:
+    {{- if eq .Values.type "gke" }}
+    networking.gke.io/v1beta1.FrontendConfig: "{{ .Release.Name }}-frontend-config"
+    {{- end }}
+    {{- if .Values.ingress.annotations }}
+    {{- toYaml .Values.ingress.annotations | nindent 4 }}
+    {{- end }}
+spec:
+  {{- if .Values.certificate.enabled }}
+  tls:
+    - secretName: {{ .Release.Name }}-tls
+      hosts:
+      - {{ .Values.app.host }}
+  {{- end }}
+  rules:
+    - host: {{ .Values.app.host }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-service
+              servicePort: 3000

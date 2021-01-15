@@ -1,30 +1,17 @@
 apiVersion: v1
 entries:
-  retrotool-chart:
+  retrotool:
   - apiVersion: v2
-    created: "2021-01-15T15:38:26.990941558+01:00"
+    created: "2021-01-15T15:48:46.047199452+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
       repository: https://charts.helm.sh/stable
       version: 3.11.6
     description: RetroTool - a simple, but powerful tool for remote retrospectives
-    digest: afdca20f553126349edb4ffe3042fc12959e7f69772cc02360a8a12ab5ce8c54
-    name: retrotool-chart
+    digest: b38aac1182f17412820e4ca18ae8858241ce2509baaf982f49e1acc51fc367dd
+    name: retrotool
     urls:
-    - https://u2i.github.io/helm-charts/retrotool-chart-1.1.1.tgz
-    version: 1.1.1
-  - apiVersion: v2
-    created: "2021-01-15T15:38:26.989346464+01:00"
-    dependencies:
-    - condition: mongodb-replicaset.enabled
-      name: mongodb-replicaset
-      repository: https://kubernetes-charts.storage.googleapis.com/
-      version: 3.11.6
-    description: RetroTool - a simple, but powerful tool for remote retrospectives
-    digest: ac6a9239e55deec642f4522f0bf21fc8db79784e90823edbf39e14efd02f83df
-    name: retrotool-chart
-    urls:
-    - https://u2i.github.io/helm-charts/retrotool-chart-1.1.0.tgz
-    version: 1.1.0
-generated: "2021-01-15T15:38:26.981290133+01:00"
+    - https://u2i.github.io/helm-charts/retrotool-1.0.0.tgz
+    version: 1.0.0
+generated: "2021-01-15T15:48:46.044326888+01:00"

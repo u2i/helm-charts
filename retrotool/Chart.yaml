@@ -1,10 +1,10 @@
 apiVersion: v2
 description: RetroTool - a simple, but powerful tool for remote retrospectives
 name: retrotool-chart
-version: 1.1.0
+version: 1.1.1
 
 dependencies:
   - name: mongodb-replicaset
-    repository: https://kubernetes-charts.storage.googleapis.com/
+    repository: https://charts.helm.sh/stable
     version: 3.11.6
     condition: mongodb-replicaset.enabled

@@ -10,4 +10,5 @@ and automatically installs MongoDB replicaset (configurable).
 ### Supported version
 
 * 1.1.0 - released on 2021-01-14
+* 1.1.1 - released on 2020-01-15
 

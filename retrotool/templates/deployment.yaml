@@ -1,5 +1,5 @@
-{{- $date := now | date "2006-01-17_15-04" -}}
-{{- $defaultRedisSettings := dict "redis" (dict "host" (printf "%s-local-redis-master" $.Release.Name)) -}}
+{{- $date := now -}}
+{{- $defaultRedisSettings := dict "redis" (dict "host" (printf "%s-redis-master" .Release.Name)) -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

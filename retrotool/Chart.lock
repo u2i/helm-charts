@@ -1,6 +1,9 @@
 dependencies:
 - name: mongodb-replicaset
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  repository: https://charts.helm.sh/stable
   version: 3.11.6
-digest: sha256:732b7b720993cda15f158c98e16a27f98014fbea2c4ba2ada831bb47ec29a259
-generated: "2020-06-30T18:42:39.117012335+02:00"
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 12.10.0
+digest: sha256:f48ddac338f00fafdaaf3fab66779a8d7f057e1ffbc1d05b3f9d35c571acbbe0
+generated: "2021-04-02T17:36:07.799089408+02:00"

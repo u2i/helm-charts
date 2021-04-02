@@ -52,6 +52,14 @@ mongodb-replicaset:
                   values:
                     - "mongodb-replicaset"
 
+# Default Redis configuration (for Oplog)
+redis:
+  enabled: false
+  usePassword: false
+  cluster:
+    enabled: true
+    slaveCount: 2
+
 # Custom settings for accessing MongoDB
 overrideDatabase:
   host: ~ # Set host value to override DB settings
@@ -122,6 +130,7 @@ app:
   mail:
     # SMTP URL required to allow sending emails
     url: smtp://localhost:587
+  redisOplog: {} # Override Redis Oplog settings
   settings:
     # Internal app settings
     public:

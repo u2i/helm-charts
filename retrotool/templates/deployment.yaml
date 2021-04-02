@@ -1,4 +1,5 @@
 {{- $date := now | date "2006-01-17_15-04" -}}
+{{- $defaultRedisSettings := dict "redis" (dict "host" (printf "%s-local-redis-master" $.Release.Name)) -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -41,15 +42,20 @@ spec:
             - name: HTTP_FORWARDED_COUNT
               value: '1'
             - name: MONGO_URL
-              value: '{{ include "mongodb.replicaset_url" . }}'
+              value: {{ include "mongodb.replicaset_url" . | quote }}
+            {{- if .Values.redis.enabled }}
+            - name: REDIS_OPLOG_SETTINGS
+              value: {{ mustMerge $defaultRedisSettings .Values.app.redisOplog | toJson | quote }}
+            {{- else }}
             - name: MONGO_OPLOG_URL
-              value: '{{ include "mongodb.replicaset_oplog_url" . }}'
+              value: {{ include "mongodb.replicaset_oplog_url" . | quote }}
+            {{- end }}
             - name: ROOT_URL
-              value: '{{ default "https" .Values.app.protocol }}://{{ .Values.app.host }}'
+              value: "{{ default "https" .Values.app.protocol }}://{{ .Values.app.host }}"
             - name: METEOR_SETTINGS
               value: {{ toJson .Values.app.settings | quote }}
             - name: MAIL_URL
-              value: {{ .Values.app.mail.url }}
+              value: {{ .Values.app.mail.url | quote }}
           securityContext:
             runAsUser: 1000
             runAsGroup: 2000

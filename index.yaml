@@ -2,6 +2,23 @@ apiVersion: v1
 entries:
   retrotool:
   - apiVersion: v2
+    created: "2021-04-13T16:50:05.41729742+02:00"
+    dependencies:
+    - condition: mongodb-replicaset.enabled
+      name: mongodb-replicaset
+      repository: https://charts.helm.sh/stable
+      version: 3.11.6
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.10.0
+    description: RetroTool - a simple, but powerful tool for remote retrospectives
+    digest: a919de32391f71463d0d6e5c210c3f10f3790859b673facd29f56519031a666a
+    name: retrotool
+    urls:
+    - https://u2i.github.io/helm-charts/retrotool-1.0.2-beta3.tgz
+    version: 1.0.2-beta3
+  - apiVersion: v2
     created: "2021-04-13T16:43:38.282126022+02:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
@@ -19,7 +36,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.0.2-beta2.tgz
     version: 1.0.2-beta2
   - apiVersion: v2
-    created: "2021-04-13T16:43:38.274011857+02:00"
+    created: "2021-04-13T16:50:05.407988656+02:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -36,7 +53,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.0.2-beta1.tgz
     version: 1.0.2-beta1
   - apiVersion: v2
-    created: "2021-04-13T16:43:38.262243286+02:00"
+    created: "2021-04-13T16:50:05.397827192+02:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -49,7 +66,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.0.1-beta1.tgz
     version: 1.0.1-beta1
   - apiVersion: v2
-    created: "2021-04-13T16:43:38.259100493+02:00"
+    created: "2021-04-13T16:50:05.395986495+02:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -61,4 +78,4 @@ entries:
     urls:
     - https://u2i.github.io/helm-charts/retrotool-1.0.0.tgz
     version: 1.0.0
-generated: "2021-04-13T16:43:38.255823191+02:00"
+generated: "2021-04-13T16:50:05.393885919+02:00"

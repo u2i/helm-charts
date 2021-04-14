@@ -25,5 +25,6 @@ Install with:
 
 ### Supported version
 
+* 1.0.2 - released on 2021-04-14
 * 1.0.0 - released on 2021-01-15
 

@@ -45,7 +45,7 @@ spec:
               value: {{ include "mongodb.replicaset_url" . | quote }}
             {{- if .Values.redis.enabled }}
             - name: REDIS_OPLOG_SETTINGS
-              value: {{ mustMerge $defaultRedisSettings .Values.app.redisOplog | toJson | quote }}
+              value: {{ include "redis.settings" . | quote }}
             {{- else }}
             - name: MONGO_OPLOG_URL
               value: {{ include "mongodb.replicaset_oplog_url" . | quote }}

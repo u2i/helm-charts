@@ -75,19 +75,9 @@ Create full Redis settings for performance oplog
   {{- $settings := dict "redis" (dict) -}}
   {{- $overrides := default (dict) .Values.app.redisOplog -}}
   {{- if .Values.redis.sentinel.enabled -}}
-    {{
-				$_ := set $settings.redis "sentinels" (
-        	list
-          	(
-            	dict
-              	"host" (printf "%s-redis" $.Release.Name)
-	              "port" .Values.redis.sentinel.port
-  	        )
-    	  )
-    }}
-    {{-
-      $_ := set $settings.redis "name" .Values.redis.sentinel.masterSet
-    -}}
+    {{- $sentinel := dict "host" (printf "%s-redis" $.Release.Name) "port" .Values.redis.sentinel.port -}}
+    {{- $_ := set $settings.redis "sentinels" (list $sentinel) -}}
+    {{- $_ := set $settings.redis "name" .Values.redis.sentinel.masterSet -}}
   {{- else -}}
     {{- $_ := set $settings.redis "host" (printf "%s-redis-master" $.Release.Name) -}}
   {{- end -}}

@@ -23,8 +23,9 @@ Install with:
 1. `helm repo add u2i https://u2i.github.io/helm-charts`
 2. `helm install u2i/retrotool`
 
-### Supported version
+### Supported versions
 
+* 1.2.2 - released on 2021-06-23
 * 1.2.1 - released on 2021-04-20
 * 1.1.0 - released on 2021-04-14
 * 1.0.0 - released on 2021-01-15

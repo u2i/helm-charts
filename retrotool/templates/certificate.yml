@@ -10,10 +10,12 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   secretName: {{ .Release.Name }}-tls
-  commonName: {{ .Values.app.host }}
+  commonName: {{ index .Values.app.hosts 0 }}
   renewBefore: 720h # 30 days
   dnsNames:
-    - {{ .Values.app.host }}
+    {{- range .Values.app.hosts }}
+    - {{ . }}
+    {{- end }}
   issuerRef:
     name: {{ .Values.certificate.issuer.name }}
     kind: {{ .Values.certificate.issuer.kind }}

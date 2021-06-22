@@ -127,7 +127,8 @@ backup:
 
 app:
   image: "retrotool:1.0.0"
-  host: "retrotool.example.com"
+  hosts:
+    - "retrotool.example.com"
   protocol: "https"
   imagePullPolicy: Always
   mail:

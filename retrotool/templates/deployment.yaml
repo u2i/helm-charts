@@ -51,7 +51,7 @@ spec:
               value: {{ include "mongodb.replicaset_oplog_url" . | quote }}
             {{- end }}
             - name: ROOT_URL
-              value: "{{ default "https" .Values.app.protocol }}://{{ .Values.app.host }}"
+              value: "{{ default "https" .Values.app.protocol }}://{{ index .Values.app.hosts 0 }}"
             - name: METEOR_SETTINGS
               value: {{ toJson .Values.app.settings | quote }}
             - name: MAIL_URL
@@ -68,7 +68,7 @@ spec:
               port: app-port
               httpHeaders:
                 - name: Host
-                  value: {{ .Values.app.host }}
+                  value: {{ index .Values.app.hosts 0 }}
             initialDelaySeconds: 30
             periodSeconds: 10
           livenessProbe:
@@ -77,7 +77,7 @@ spec:
               port: app-port
               httpHeaders:
                 - name: Host
-                  value: {{ .Values.app.host }}
+                  value: {{ index .Values.app.hosts 0 }}
             failureThreshold: 5
             periodSeconds: 60
           resources:

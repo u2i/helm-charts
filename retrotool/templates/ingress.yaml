@@ -19,12 +19,16 @@ spec:
   tls:
     - secretName: {{ .Release.Name }}-tls
       hosts:
-      - {{ .Values.app.host }}
+        {{- range .Values.app.hosts }}
+        - {{ . }}
+        {{- end }}
   {{- end }}
   rules:
-    - host: {{ .Values.app.host }}
+    {{- range .Values.app.hosts }}
+    - host: {{ . }}
       http:
         paths:
           - backend:
-              serviceName: {{ .Release.Name }}-service
+              serviceName: {{ $.Release.Name }}-service
               servicePort: 3000
+    {{- end }}

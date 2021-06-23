@@ -1,6 +1,6 @@
 {{- if and (index .Values "mongodb-replicaset" "enabled") (and .Values.backup.enabled .Values.backup.daily) }}
 {{- $instance := 0 -}}
-{{- if gt (index .Values "mongodb-replicaset" "replicas") 1 -}}
+{{- if gt (index .Values "mongodb-replicaset" "replicas") 1.0 -}}
   {{- $instance = 1 -}}
 {{- end -}}
 apiVersion: velero.io/v1

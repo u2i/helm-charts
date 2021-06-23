@@ -6,7 +6,7 @@
 apiVersion: velero.io/v1
 kind: Schedule
 metadata:
-  name: {{ .Release.Name }}-backup-db-daily
+  name: {{ .Release.Name }}-{{ .Release.Namespace }}-backup-db-daily
   namespace: velero
 spec:
   schedule: 55 0 * * *

@@ -23,7 +23,7 @@ spec:
     storageLocation: {{ .Values.backup.storageLocation }}
     volumeSnapshotLocations:
       - {{ .Values.backup.storageLocation }}
-    ttl: 24h0m0s
+    ttl: 168h0m0s
     hooks:
       resources:
         - name: lock-filesystem

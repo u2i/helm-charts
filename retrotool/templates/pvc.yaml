@@ -1,0 +1,32 @@
+{{- if .Values.nfs.enabled }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-pv
+spec:
+  capacity:
+    storage: {{ default "10Gi" .Values.nfs.size }}
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: {{ .Release.Name }}-nfs-server.{{ .Release.Namespace }}.svc.cluster.local
+    path: "/"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-pvc
+  labels:
+    app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}
+    helm.sh/chart: {{ include "retrotool-chart.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: {{ .Release.Name }}-pv
+  storageClassName: ""
+  resources:
+    requests:
+      storage: {{ default "10Gi" .Values.nfs.size }}
+{{- end }}

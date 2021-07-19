@@ -1,0 +1,44 @@
+{{- if .Values.nfs.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-nfs-server
+  labels:
+    app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}-nfs
+    helm.sh/chart: {{ include "retrotool-chart.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}-nfs
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        retrotool: "nfs-server"
+        app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}-nfs
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-nfs-server
+          image: "gcr.io/google_containers/volume-nfs:0.8"
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - name: nfs
+              containerPort: 2049
+            - name: mountd
+              containerPort: 20048
+            - name: rpcbind
+              containerPort: 111
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-nfs-pvc
+{{- end }}

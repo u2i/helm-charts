@@ -63,6 +63,12 @@ redis:
     enabled: true
     slaveCount: 2
 
+# Setup NFS server for serving backgrounds
+nfs:
+  enabled: false
+  size: 50GiB
+  storageClass: "standard"
+
 # Custom settings for accessing MongoDB
 overrideDatabase:
   host: ~ # Set host value to override DB settings

@@ -1,0 +1,18 @@
+{{- if .Values.nfs.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-nfs-pvc
+  labels:
+    app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}
+    helm.sh/chart: {{ include "retrotool-chart.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ default "10Gi" .Values.nfs.size }}
+  storageClassName: {{ default "" .Values.nfs.storageClass }}
+{{- end }}

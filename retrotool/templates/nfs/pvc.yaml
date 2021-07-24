@@ -3,6 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-nfs-pvc
+  namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}
     helm.sh/chart: {{ include "retrotool-chart.chart" . }}

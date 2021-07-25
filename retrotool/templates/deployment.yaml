@@ -102,7 +102,7 @@ spec:
       volumes:
         - name: backgrounds-volume
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-pvc
+            claimName: {{ .Release.Name }}-{{ .Release.Namespace }}-pvc
       {{- end }}
       {{- if .Values.deployment.topologySpreadConstraints }}
       topologySpreadConstraints: {{- toYaml .Values.deployment.topologySpreadConstraints | nindent 8 }}

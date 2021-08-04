@@ -1,21 +1,22 @@
-{{- if and (index .Values "mongodb-replicaset" "enabled") (and .Values.backup.enabled .Values.backup.hourly) }}
-{{- $instance := 0 -}}
-{{- if gt (index .Values "mongodb-replicaset" "replicas") 1.0 -}}
-  {{- $instance = 1 -}}
-{{- end -}}
+{{- $type := .Values.database.type -}}
+{{- $enabled := and .Values.backup.enabled .Values.backup.hourly -}}
+{{- if and $enabled (or (eq $type "replicaset") (eq $type "operator")) }}
 apiVersion: velero.io/v1
 kind: Schedule
 metadata:
   name: {{ .Release.Name }}-{{ .Release.Namespace }}-backup-db-hourly
   namespace: velero
 spec:
-  schedule: 55 * * * *
+  schedule: "55 * * * *"
   template:
     labelSelector:
       matchLabels:
+      {{- if eq $type "replicaset" }}
         app: mongodb-replicaset
         release: {{ .Release.Name }}
-        statefulset.kubernetes.io/pod-name: {{ .Release.Name }}-mongodb-replicaset-{{ $instance }}
+      {{- else if eq $type "operator" }}
+        app: mongodb-svc
+      {{- end }}
     includedNamespaces:
       - {{ .Release.Namespace }}
     includeClusterResources: true
@@ -24,31 +25,4 @@ spec:
     volumeSnapshotLocations:
       - {{ .Values.backup.storageLocation }}
     ttl: 168h0m0s
-    hooks:
-      resources:
-        - name: lock-filesystem
-          pre:
-            - exec:
-                container: mongodb-replicaset
-                command:
-                  - mongo
-                  - --eval
-                  - "rs.stepDown()"
-                timeout: 5m
-            - exec:
-                container: mongodb-replicaset
-                command:
-                  - mongo
-                  - --eval
-                  - "printjson(db.fsyncLock())"
-                timeout: 5m
-          post:
-            - exec:
-                container: mongodb-replicaset
-                command:
-                  - mongo
-                  - --eval
-                  - "printjson(db.fsyncUnlock())"
-                onError: Continue
-                timeout: 15m
 {{- end }}

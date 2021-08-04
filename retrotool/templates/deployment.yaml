@@ -53,13 +53,27 @@ spec:
             - name: HTTP_FORWARDED_COUNT
               value: '1'
             - name: MONGO_URL
-              value: {{ include "mongodb.replicaset_url" . | quote }}
+              {{- if eq .Values.database.type "operator" }}
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-connection
+                  key: url
+              {{- else }}
+              value: {{ include "mongodb.url" . | quote }}
+              {{- end }}
             {{- if .Values.redis.enabled }}
             - name: REDIS_OPLOG_SETTINGS
               value: {{ include "redis.settings" . | quote }}
             {{- else }}
             - name: MONGO_OPLOG_URL
-              value: {{ include "mongodb.replicaset_oplog_url" . | quote }}
+              {{- if eq .Values.database.type "operator" }}
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-connection
+                  key: oplogUrl
+              {{- else }}
+              value: {{ include "mongodb.oplog_url" . | quote }}
+              {{- end }}
             {{- end }}
             - name: ROOT_URL
               value: "{{ default "https" .Values.app.protocol }}://{{ index .Values.app.hosts 0 }}"

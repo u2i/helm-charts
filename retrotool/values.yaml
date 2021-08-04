@@ -20,7 +20,35 @@ resources:
     cpu: 700m
     memory: 1024Mi
 
-# Default MongoDB replicaset settings
+# Database settings
+database:
+  # Type of database: 
+  # * replicaset (using mongodb-replicaset chart)
+  # * operator (using MongoDB Kubernetes operator)
+  # * custom (custom URI)
+  type: "replicaset"
+  # Settings for operator
+  operator:
+    version: "4.4.7"
+    replicas: 3
+    arbiters: 0
+    replicaSetName: rs0
+    readPreference: ~
+    maxStalenessSeconds: ~
+    storage:
+      size: 10Gi
+      className: "standard"
+    resources: {}
+  # Settings for custom DB
+  custom:
+    host: ~
+    port: 27017
+    database: "retrotool"
+    replicaset: "rs0"
+    readPreference: ~
+    maxStalenessSeconds: ~
+
+# Default MongoDB replicaset chart settings
 mongodb-replicaset:
   enabled: true
   replicas: 3
@@ -68,15 +96,6 @@ nfs:
   enabled: false
   size: 50GiB
   storageClass: "standard"
-
-# Custom settings for accessing MongoDB
-overrideDatabase:
-  host: ~ # Set host value to override DB settings
-  port: 27017
-  database: "retrotool"
-  replicaset: "rs0"
-  readPreference: ~
-  maxStalenessSeconds: ~
 
 ingress:
   # Additional annotations for Ingress

@@ -1,0 +1,67 @@
+{{- if eq .Values.database.type "operator" }}
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: mongodb
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}
+    helm.sh/chart: {{ include "retrotool-chart.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  members: {{ .Values.database.operator.replicas }}
+  type: ReplicaSet
+  version: {{ .Values.database.operator.version }}
+  arbiters: {{ .Values.database.operator.arbiters }}
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: retrotool
+      db: admin
+      passwordSecretRef:
+        name: mongodb-password
+      roles:
+        - name: dbOwner
+          db: retrotool
+        - name: read
+          db: local
+      scramCredentialsSecretName: mongodb
+  statefulSet:
+    spec:
+      selector:
+        matchLabels:
+          retrotool: mongodb
+      volumeClaimTemplates:
+        - metadata:
+            name: data-volume
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: {{ .Values.database.operator.storage.size }}
+            storageClassName: {{ .Values.database.operator.storage.className }}
+      template:
+        metadata:
+          labels:
+            retrotool: mongodb
+        spec:
+          containers:
+            - name: mongodb-agent
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 400M
+                limits:
+                  cpu: 500m
+                  memory: 500M
+            {{- if .Values.database.operator.resources }}
+            - name: mongod
+              resources: 
+                {{- toYaml .Values.database.operator.resources | nindent 16 }}
+            {{- end }}
+          {{- if .Values.database.operator.affinity  }}
+          affinity: {{- toYaml .Values.database.operator.affinity  | nindent 10 }}
+          {{- end }}
+{{- end }}

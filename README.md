@@ -25,6 +25,7 @@ Install with:
 
 ### Supported versions
 
+* 1.4.0 - released on 2021-08-04
 * 1.3.2 - released on 2021-07-25
 * 1.2.8 - released on 2021-07-10
 * 1.2.5 - released on 2021-06-28
@@ -33,4 +34,18 @@ Install with:
 * 1.2.1 - released on 2021-04-20
 * 1.1.0 - released on 2021-04-14
 * 1.0.0 - released on 2021-01-15
+
+## MongoDB Kubernetes Operator
+
+This chart allows you to install MongoDB Community Kubernetes Operator into a Kubernetes cluster. 
+
+It is a copy of official chart, just packaged and published for ease of use.
+
+Install with:
+1. `helm repo add u2i https://u2i.github.io/helm-charts`
+2. `helm install u2i/mongodb-kubernetes-operator`
+
+### Supported versions
+
+* 0.7.0 - released on 2021-08-04
 

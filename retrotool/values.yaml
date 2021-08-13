@@ -29,6 +29,7 @@ database:
   type: "replicaset"
   # Settings for operator
   operator:
+    enabled: false
     version: "4.4.7"
     replicas: 3
     arbiters: 0

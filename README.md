@@ -50,3 +50,14 @@ Install with:
 
 * 0.7.0 - released on 2021-08-04
 
+## Next.js
+
+This chart allows you to deploy a Next.js app into a Kubernetes cluster. It supports certificates (through Cert-Manager) and CDN with Google Kubernetes Engine (GKE) deployment.
+
+Install with:
+1. `helm repo add u2i https://u2i.github.io/helm-charts`
+2. `helm install u2i/nextjs`
+
+### Supported versions
+
+* 1.0.0 - released on 2021-11-30

@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Deploy a Next.js app to the Kubernetes cluster
-name: next.js
+name: nextjs
 version: 1.0.0

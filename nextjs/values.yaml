@@ -14,11 +14,11 @@ replicas:
 # App pod resources
 resources:
   limits:
-    cpu: 1000m
-    memory: 1536Mi
-  requests:
-    cpu: 700m
+    cpu: 500m
     memory: 1024Mi
+  requests:
+    cpu: 200m
+    memory: 512Mi
 
 ingress:
   # Additional annotations for Ingress
@@ -38,10 +38,10 @@ deployment:
             topologyKey: "kubernetes.io/hostname"
             labelSelector:
               matchExpressions:
-                - key: retrotool
+                - key: app.kubernetes.io/component
                   operator: In
                   values:
-                    - "web-server"
+                    - "app"
   containers:
     app:
       # Additional env values for app container
@@ -67,7 +67,6 @@ app:
   image: "app:1.0.0"
   hosts:
     - "app.example.com"
-  protocol: "https"
   imagePullPolicy: Always
   settings:
     # TODO: Add proper settings here

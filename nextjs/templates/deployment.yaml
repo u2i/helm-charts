@@ -19,6 +19,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "app.name" . }}
+        app.kubernetes.io/component: "app"
         app.kubernetes.io/instance: {{ .Release.Name }}
         deployed-at: {{ $date }}
     spec:

@@ -1,0 +1,15 @@
+{{- if eq .Values.type "gke" }}
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: {{ .Release.Name }}-frontend-config
+  labels:
+    helm.sh/chart: {{ include "chart.name" . }}
+    app.kubernetes.io/name: {{ include "app.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  {{- if .Values.certificate.sslPolicy }}
+  sslPolicy: {{ .Values.certificate.sslPolicy }}
+  {{- end }}
+{{- end }}

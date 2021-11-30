@@ -1,0 +1,15 @@
+{{- if eq .Values.type "gke" }}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: {{ .Release.Name }}-backend-config
+  labels:
+    helm.sh/chart: {{ include "chart.name" . }}
+    app.kubernetes.io/name: {{ include "app.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  cdn:
+    enabled: {{ .Values.cdn.enabled }}
+    cachePolicy: {{ toYaml .Values.cdn.policy | nindent 6 }}
+{{- end }}

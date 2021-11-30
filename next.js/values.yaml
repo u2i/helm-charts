@@ -1,0 +1,73 @@
+# Hosting type, supported: "gke" (Google Kubernetes Engine), "other"
+type: "other"
+
+# Autoscaling settings
+replicas:
+  min: 1
+  max: 5
+  limits:
+    # CPU utilization limit (%) after which K8s creates another pod
+    cpu: 85
+    # Memory utilization limit (%) after which K8s creates another pod
+    memory: 90
+
+# App pod resources
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1536Mi
+  requests:
+    cpu: 700m
+    memory: 1024Mi
+
+ingress:
+  # Additional annotations for Ingress
+  annotations: {}
+
+service:
+  # Additional annotations for Service
+  annotations: {}
+
+deployment:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        # Affinity to schedule web servers on different nodes if possible
+        - weight: 10
+          podAffinityTerm:
+            topologyKey: "kubernetes.io/hostname"
+            labelSelector:
+              matchExpressions:
+                - key: retrotool
+                  operator: In
+                  values:
+                    - "web-server"
+  containers:
+    app:
+      # Additional env values for app container
+      env: []
+  topologySpreadConstraints: []
+
+# Let's Encrypt certificate settings
+certificate:
+  enabled: true
+  email: "app@example.com"
+  # For GKE you can set your SSL policy for GCP Load Balancers
+  sslPolicy: ~
+  issuer:
+    name: "letsencrypt-prod"
+    kind: ClusterIssuer
+
+# Google CDN config, works when type is "gke"
+cdn:
+  enabled: false
+  policy: {}
+
+app:
+  image: "app:1.0.0"
+  hosts:
+    - "app.example.com"
+  protocol: "https"
+  imagePullPolicy: Always
+  settings:
+    # TODO: Add proper settings here

@@ -30,6 +30,8 @@ database:
   # Settings for operator
   operator:
     enabled: false
+    # Custom password for DB
+    password: ~
     version: "4.4.7"
     replicas: 3
     arbiters: 0

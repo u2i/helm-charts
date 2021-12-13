@@ -103,6 +103,8 @@ nfs:
 ingress:
   # Additional annotations for Ingress
   annotations: {}
+  # IngressClass to use for this particular release, by default use default ingress class
+  ingressClassName: ~
 
 service:
   # Additional annotations for Service

@@ -3,7 +3,7 @@ entries:
   mongodb-kubernetes-operator:
   - apiVersion: v2
     appVersion: 0.7.0
-    created: "2021-12-10T13:15:31.825886374+01:00"
+    created: "2021-12-13T12:25:33.761401677+01:00"
     description: MongoDB Kubernetes Community Operator
     digest: 98f57c15007a7bee5280f8bcd069b1230ef1bdb1a96aeb3468bd067edd238225
     home: https://github.com/mongodb/mongodb-kubernetes-operator/
@@ -21,7 +21,7 @@ entries:
     version: 0.7.0
   nextjs:
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.82617369+01:00"
+    created: "2021-12-13T12:25:33.761696112+01:00"
     description: Deploy a Next.js app to the Kubernetes cluster
     digest: adafe59be9901052fc319bacf5903fdda9bcc2772c5e6eb8b36caaab7e6312c9
     name: nextjs
@@ -30,7 +30,24 @@ entries:
     version: 1.0.0
   retrotool:
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.876701113+01:00"
+    created: "2021-12-13T12:25:33.823004539+01:00"
+    dependencies:
+    - condition: mongodb-replicaset.enabled
+      name: mongodb-replicaset
+      repository: https://charts.helm.sh/stable
+      version: 3.11.6
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.10.0
+    description: RetroTool - a simple, but powerful tool for remote retrospectives
+    digest: a77f57215203b73430ee949b08b0819c2a5a021d399574e3fca1444b8b281c7a
+    name: retrotool
+    urls:
+    - https://u2i.github.io/helm-charts/retrotool-1.4.4.tgz
+    version: 1.4.4
+  - apiVersion: v2
+    created: "2021-12-13T12:25:33.818853742+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -47,7 +64,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.4.3.tgz
     version: 1.4.3
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.873259933+01:00"
+    created: "2021-12-13T12:25:33.812947032+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -64,7 +81,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.4.1.tgz
     version: 1.4.1
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.869452912+01:00"
+    created: "2021-12-13T12:25:33.805772077+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -81,7 +98,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.4.0.tgz
     version: 1.4.0
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.865655179+01:00"
+    created: "2021-12-13T12:25:33.799535008+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -98,7 +115,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.3.2.tgz
     version: 1.3.2
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.862209405+01:00"
+    created: "2021-12-13T12:25:33.793847809+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -115,7 +132,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.2.8.tgz
     version: 1.2.8
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.85518829+01:00"
+    created: "2021-12-13T12:25:33.789592441+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -132,7 +149,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.2.5.tgz
     version: 1.2.5
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.850375214+01:00"
+    created: "2021-12-13T12:25:33.785949714+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -149,7 +166,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.2.4.tgz
     version: 1.2.4
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.846939767+01:00"
+    created: "2021-12-13T12:25:33.782758682+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -166,7 +183,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.2.3.tgz
     version: 1.2.3
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.843315218+01:00"
+    created: "2021-12-13T12:25:33.779178215+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -183,7 +200,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.2.1.tgz
     version: 1.2.1
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.839696844+01:00"
+    created: "2021-12-13T12:25:33.77589466+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -200,7 +217,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.836340254+01:00"
+    created: "2021-12-13T12:25:33.772171055+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -217,7 +234,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.0.2-beta3.tgz
     version: 1.0.2-beta3
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.832539656+01:00"
+    created: "2021-12-13T12:25:33.768179609+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -234,7 +251,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.0.2-beta1.tgz
     version: 1.0.2-beta1
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.828637594+01:00"
+    created: "2021-12-13T12:25:33.764572664+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -247,7 +264,7 @@ entries:
     - https://u2i.github.io/helm-charts/retrotool-1.0.1-beta1.tgz
     version: 1.0.1-beta1
   - apiVersion: v2
-    created: "2021-12-10T13:15:31.82740259+01:00"
+    created: "2021-12-13T12:25:33.76298372+01:00"
     dependencies:
     - condition: mongodb-replicaset.enabled
       name: mongodb-replicaset
@@ -259,4 +276,4 @@ entries:
     urls:
     - https://u2i.github.io/helm-charts/retrotool-1.0.0.tgz
     version: 1.0.0
-generated: "2021-12-10T13:15:31.825540348+01:00"
+generated: "2021-12-13T12:25:33.761005185+01:00"

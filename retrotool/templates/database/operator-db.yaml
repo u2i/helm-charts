@@ -62,6 +62,6 @@ spec:
                 {{- toYaml .Values.database.operator.resources | nindent 16 }}
             {{- end }}
           {{- if .Values.database.operator.affinity  }}
-          affinity: {{- toYaml .Values.database.operator.affinity  | nindent 10 }}
+          affinity: {{- toYaml .Values.database.operator.affinity  | nindent 12 }}
           {{- end }}
 {{- end }}

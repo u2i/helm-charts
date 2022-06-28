@@ -25,6 +25,10 @@ Install with:
 
 ### Supported versions
 
+* 1.5.0 - released on 2022-06-28
+  * Upgrade Redis chart to 16.13.0 (**contains changes to values file**)
+* 1.4.6 - released on 2022-06-28
+  * Allow eviction of MongoDB pods created by Kubernetes operator
 * 1.4.5 - released on 2022-02-08
 * 1.4.4 - released on 2021-12-13
 * 1.4.3 - released on 2021-12-10

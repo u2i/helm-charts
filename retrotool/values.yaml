@@ -85,14 +85,15 @@ mongodb-replicaset:
 
 # Default Redis configuration (for Oplog)
 redis:
+  architecture: replication
   enabled: false
-  usePassword: false
   sentinel:
     enabled: false
-    usePassword: false
-  cluster:
-    enabled: true
-    slaveCount: 2
+  replica:
+    replicaCount: 2
+  auth:
+    enabled: false
+    sentinel: false
 
 # Setup NFS server for serving backgrounds
 nfs:

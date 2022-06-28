@@ -1,7 +1,7 @@
 apiVersion: v2
 description: RetroTool - a simple, but powerful tool for remote retrospectives
 name: retrotool
-version: 1.4.6
+version: 1.5.0
 
 dependencies:
   - name: mongodb-replicaset
@@ -10,5 +10,5 @@ dependencies:
     condition: mongodb-replicaset.enabled
   - name: redis
     repository: https://charts.bitnami.com/bitnami
-    version: 12.10.0
+    version: 16.13.0
     condition: redis.enabled

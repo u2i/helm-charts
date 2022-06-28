@@ -44,6 +44,8 @@ spec:
             storageClassName: {{ .Values.database.operator.storage.className }}
       template:
         metadata:
+          annotations:
+            cluster-autoscaler.kubernetes.io/safe-to-evict: true
           labels:
             retrotool: mongodb
         spec:

@@ -17,9 +17,11 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: mongodb-database
+  namespace: {{ .Release.Namespace }}
 subjects:
 - kind: ServiceAccount
   name: mongodb-database
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: Role
   name: mongodb-database

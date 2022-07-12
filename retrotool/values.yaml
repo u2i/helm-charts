@@ -1,4 +1,4 @@
-# Hosting type, supported: "gke" (Google Kubernetes Engine), "other"
+# Hosting type, supported: "gke" (Google Kubernetes Engine), "minikube", "other"
 type: "other"
 
 # Autoscaling settings

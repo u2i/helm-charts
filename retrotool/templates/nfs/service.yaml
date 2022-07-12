@@ -5,6 +5,10 @@ metadata:
   name: {{ .Release.Name }}-nfs-server
   namespace: {{ .Release.Namespace }}
 spec:
+  {{- if eq .Values.type "minikube" }}
+  type: ClusterIP
+  clusterIP: 10.96.200.2
+  {{- end }}
   ports:
     - name: nfs
       port: 2049

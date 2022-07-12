@@ -25,6 +25,8 @@ Install with:
 
 ### Supported versions
 
+* 1.5.1 - released on 2022-07-12
+  * Update MongoDBCommunity resource to properly configure a replicaset and connect to it
 * 1.5.0 - released on 2022-06-28
   * Upgrade Redis chart to 16.13.0 (**contains changes to values file**)
 * 1.4.6 - released on 2022-06-28

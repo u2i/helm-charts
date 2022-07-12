@@ -55,36 +55,28 @@
 
 # Create MongoDB url for MongoDB Kubernetes Operator
 {{- define "mongodb.operator_url" -}}
-  {{- $replicaSetName := .Values.database.operator.replicaSetName -}}
   {{- $readPreference := default "" .Values.database.operator.readPreference -}}
   {{- $maxStalenessSeconds := default "" (.Values.database.operator.maxStalenessSeconds|int) -}}
   {{- $replicas := .Values.database.operator.replicas|int -}}
-  {{- printf "mongodb://retrotool:%s@mongodb-svc/retrotool?authSource=admin" .password -}}
-  {{- if gt $replicas 1 -}}
-    {{- printf "&replicaSet=%s" $replicaSetName -}}
-    {{- if and $readPreference -}}
-      {{- printf "&readPreference=%s" $readPreference  -}}
-      {{- if and $maxStalenessSeconds (ne $readPreference "primary") -}}
-        {{- printf "&maxStalenessSeconds=%d" ($maxStalenessSeconds|int)  -}}
-      {{- end -}}
+  {{- printf "mongodb+srv://retrotool:%s@mongodb-svc.%s.svc.cluster.local/retrotool?authSource=admin&tls=false&replicaSet=mongodb" .password .namespace -}}
+  {{- if and $readPreference -}}
+    {{- printf "&readPreference=%s" $readPreference  -}}
+    {{- if and $maxStalenessSeconds (ne $readPreference "primary") -}}
+      {{- printf "&maxStalenessSeconds=%d" ($maxStalenessSeconds|int)  -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
 
 # Create MongoDB Oplog url for MongoDB Kubernetes Operator
 {{- define "mongodb.operator_oplog_url" -}}
-  {{- $replicaSetName := .Values.database.operator.replicaSetName -}}
   {{- $readPreference := default "" .Values.database.operator.readPreference -}}
   {{- $maxStalenessSeconds := default "" (.Values.database.operator.maxStalenessSeconds|int) -}}
   {{- $replicas := .Values.database.operator.replicas|int -}}
-  {{- printf "mongodb://retrotool:%s@mongodb-svc/local?authSource=admin" .password -}}
-  {{- if gt $replicas 1 -}}
-    {{- printf "&replicaSet=%s" $replicaSetName -}}
-    {{- if and $readPreference -}}
-      {{- printf "&readPreference=%s" $readPreference  -}}
-      {{- if and $maxStalenessSeconds (ne $readPreference "primary") -}}
-        {{- printf "&maxStalenessSeconds=%d" ($maxStalenessSeconds|int)  -}}
-      {{- end -}}
+  {{- printf "mongodb+srv://retrotool:%s@mongodb-svc.%s.svc.cluster.local/local?authSource=admin&tls=false&replicaSet=mongodb" .password .namespace -}}
+  {{- if and $readPreference -}}
+    {{- printf "&readPreference=%s" $readPreference  -}}
+    {{- if and $maxStalenessSeconds (ne $readPreference "primary") -}}
+      {{- printf "&maxStalenessSeconds=%d" ($maxStalenessSeconds|int)  -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}

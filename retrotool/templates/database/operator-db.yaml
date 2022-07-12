@@ -10,9 +10,9 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
-  members: {{ .Values.database.operator.replicas }}
   type: ReplicaSet
   version: {{ .Values.database.operator.version }}
+  members: {{ .Values.database.operator.replicas }}
   arbiters: {{ .Values.database.operator.arbiters }}
   security:
     authentication:
@@ -49,6 +49,21 @@ spec:
           labels:
             retrotool: mongodb
         spec:
+          initContainers:
+          - command:
+              - chown
+              - -R
+              - "2000"
+              - /data
+            image: busybox
+            volumeMounts:
+            - mountPath: /data
+              name: data-volume
+            securityContext:
+              runAsNonRoot: false
+              runAsUser: 0
+              runAsGroup: 0
+            name: change-dir-permissions
           containers:
             - name: mongodb-agent
               resources:

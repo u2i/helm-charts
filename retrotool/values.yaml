@@ -35,7 +35,6 @@ database:
     version: "4.4.7"
     replicas: 3
     arbiters: 0
-    replicaSetName: rs0
     readPreference: ~
     maxStalenessSeconds: ~
     storage:

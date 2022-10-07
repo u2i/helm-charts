@@ -31,6 +31,24 @@ spec:
     - host: {{ . }}
       http:
         paths:
+          {{- if $.Values.landingPage.enabled }}
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: {{ $.Release.Name }}-landing-page-service
+                port: 
+                  number: 3000
+          {{- range $.Values.landingPage.paths }}
+          - path: {{ . }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $.Release.Name }}-landing-page-service
+                port: 
+                  number: 3000
+          {{- end }}
+          {{- end }}
           - path: /
             pathType: Prefix
             backend:

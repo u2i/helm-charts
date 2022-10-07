@@ -1,4 +1,3 @@
-{{- $date := now | date "2006-01-17_15-04" -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -8,20 +7,19 @@ metadata:
     helm.sh/chart: {{ include "retrotool-chart.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-    deployed-at: {{ $date }}
 spec:
   replicas: {{ .Values.replicas.min }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
+      retrotool: "web-server"
   template:
     metadata:
       labels:
         retrotool: "web-server"
         app.kubernetes.io/name: {{ include "retrotool-chart.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        deployed-at: {{ $date }}
     spec:
       {{- if .Values.deployment.affinity }}
       affinity: {{- toYaml .Values.deployment.affinity | nindent 8 }}

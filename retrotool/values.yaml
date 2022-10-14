@@ -165,7 +165,9 @@ landingPage:
     - /build
     - /favicon
     - /fonts
+    - /images/features
     - /images/landing
+    - /images/plans
     - /testimonials
     - /fonts-ttf.css
     - /MyFonts.css

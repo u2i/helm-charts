@@ -37,8 +37,14 @@ spec:
             {{- if .Values.landingPage.deployment.containers.app.env }}
               {{- toYaml .Values.landingPage.deployment.containers.app.env | nindent 12 }}
             {{- end }}
-            - name: API_ENDPOINT
+            - name: APP_ENDPOINT
               value: http{{ if .Values.certificate.enabled }}s{{ end }}://{{ index .Values.app.hosts 0 }}
+            - name: API_ENDPOINT
+              value: http://{{ .Release.Name }}-service.{{ .Release.Namespace }}.svc.cluster.local:3000
+            - name: FROM_EMAIL
+              value: {{ .Values.app.settings.public.email.contact }}
+            - name: RECAPTCHA_SITE_KEY
+              value: {{ .Values.app.settings.public.recaptcha.site_key }}
           securityContext:
             runAsUser: 1000
             runAsGroup: 2000

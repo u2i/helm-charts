@@ -20,12 +20,12 @@ spec:
       resource:
         name: cpu
         target:
-          type: AverageValue
-          averageValue: {{ .Values.landingPage.replicas.limits.cpu }}
+          type: Utilization
+          averageUtilization: {{ .Values.landingPage.replicas.limits.cpu }}
     - type: Resource
       resource:
         name: memory
         target:
-          type: AverageValue
-          averageValue: {{ .Values.landingPage.replicas.limits.memory }}
+          type: Utilization
+          averageUtilization: {{ .Values.landingPage.replicas.limits.memory }}
 {{- end }}

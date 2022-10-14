@@ -1,3 +1,4 @@
+{{- if .Values.landingPage.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -67,3 +68,4 @@ spec:
       {{- if .Values.landingPage.deployment.topologySpreadConstraints }}
       topologySpreadConstraints: {{- toYaml .Values.landingPage.deployment.topologySpreadConstraints | nindent 8 }}
       {{- end }}
+{{- end }}

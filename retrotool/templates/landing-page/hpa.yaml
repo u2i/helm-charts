@@ -1,4 +1,4 @@
-{{- if ne .Values.replicas.min .Values.replicas.max }}
+{{- if and .Values.landingPage.enabled (ne .Values.replicas.min .Values.replicas.max) }}
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:

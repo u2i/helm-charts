@@ -1,5 +1,5 @@
 {{- if and .Values.landingPage.enabled (ne .Values.replicas.min .Values.replicas.max) }}
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ .Release.Name }}-landing-page-hpa
@@ -19,9 +19,13 @@ spec:
     - type: Resource
       resource:
         name: cpu
-        targetAverageUtilization: {{ .Values.landingPage.replicas.limits.cpu }}
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.landingPage.replicas.limits.cpu }}
     - type: Resource
       resource:
         name: memory
-        targetAverageUtilization: {{ .Values.landingPage.replicas.limits.memory}}
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.landingPage.replicas.limits.memory }}
 {{- end }}

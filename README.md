@@ -25,6 +25,8 @@ Install with:
 
 ### Supported versions
 
+* 1.6.4 - released on 2022-11-24
+  * Update HPA to autoscaling/v2 (requires Kubernetes v1.23)
 * 1.6.3 - released on 2022-11-24
   * Add support for separate landing page app
 * 1.5.2 - released on 2022-07-12

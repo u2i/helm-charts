@@ -25,6 +25,8 @@ Install with:
 
 ### Supported versions
 
+* 1.6.3 - released on 2022-11-24
+  * Add support for separate landing page app
 * 1.5.2 - released on 2022-07-12
   * Fix namespacing of new RBAC for MongoDBCommunity operator
 * 1.5.1 - released on 2022-07-12

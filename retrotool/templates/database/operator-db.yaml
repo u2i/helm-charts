@@ -49,6 +49,12 @@ spec:
           labels:
             retrotool: mongodb
         spec:
+          {{- if .Values.database.operator.thp.disabled }}
+          volumes:
+            - name: host-sys
+              hostPath:
+                path: /sys
+          {{- end }}
           initContainers:
           - command:
               - chown

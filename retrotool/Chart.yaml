@@ -1,7 +1,7 @@
 apiVersion: v2
 description: RetroTool - a simple, but powerful tool for remote retrospectives
 name: retrotool
-version: 1.6.7
+version: 1.6.8
 
 dependencies:
   - name: mongodb-replicaset

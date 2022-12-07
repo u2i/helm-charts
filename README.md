@@ -25,6 +25,8 @@ Install with:
 
 ### Supported versions
 
+* 1.6.6 - released on 2022-12-07
+  * Add support for disabling Transparent Hugepages for better MongoDB performance in operator mode
 * 1.6.5 - released on 2022-12-07
   * Update Redis dependency with default settings for persistence storage class
 * 1.6.4 - released on 2022-11-24

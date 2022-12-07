@@ -41,6 +41,9 @@ database:
       size: 10Gi
       className: "standard"
     resources: {}
+    # Transparent Hugepages disabling for better database performance. WARNING: This affects the whole node!
+    thp:
+      disabled: true
   # Settings for custom DB
   custom:
     host: ~

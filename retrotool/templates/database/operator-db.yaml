@@ -64,7 +64,7 @@ spec:
               runAsUser: 0
               runAsGroup: 0
             name: change-dir-permissions
-          {{-if .Values.database.operator.thp.disabled }}
+          {{- if .Values.database.operator.thp.disabled }}
           - name: disable-thp
             image: busybox
             volumeMounts:

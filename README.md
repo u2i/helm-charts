@@ -25,6 +25,8 @@ Install with:
 
 ### Supported versions
 
+* 1.6.5 - released on 2022-12-07
+  * Update Redis dependency with default settings for persistence storage class
 * 1.6.4 - released on 2022-11-24
   * Update HPA to autoscaling/v2 (requires Kubernetes v1.23)
 * 1.6.3 - released on 2022-11-24

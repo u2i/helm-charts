@@ -89,7 +89,12 @@ redis:
   sentinel:
     enabled: false
   replica:
-    replicaCount: 2
+    replicaCount: 3
+    persistence:
+      storageClass: standard
+  master:
+    persistence:
+      storageClass: standard
   auth:
     enabled: false
     sentinel: false

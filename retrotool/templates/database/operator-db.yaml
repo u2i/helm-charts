@@ -56,11 +56,8 @@ spec:
                 path: /sys
           {{- end }}
           initContainers:
-          - command:
-              - chown
-              - -R
-              - "2000"
-              - /data
+          - name: change-dir-permissions
+            command: ["chown", "-R", "2000", "/data"]
             image: busybox
             volumeMounts:
             - mountPath: /data
@@ -69,14 +66,17 @@ spec:
               runAsNonRoot: false
               runAsUser: 0
               runAsGroup: 0
-            name: change-dir-permissions
           {{- if .Values.database.operator.thp.disabled }}
           - name: disable-thp
+            command: ["sh", "-c", "echo never >/host-sys/kernel/mm/transparent_hugepage/enabled"]
             image: busybox
             volumeMounts:
               - name: host-sys
                 mountPath: /host-sys
-            command: ["sh", "-c", "echo never >/host-sys/kernel/mm/transparent_hugepage/enabled"]
+            securityContext:
+              runAsNonRoot: false
+              runAsUser: 0
+              runAsGroup: 0
           {{- end }}
           containers:
             - name: mongodb-agent

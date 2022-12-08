@@ -25,6 +25,8 @@ Install with:
 
 ### Supported versions
 
+* 1.6.10 - released on 2022-12-08
+  * Set ulimits to recommended values for MongoDB operator databases
 * 1.6.9 - released on 2022-12-07
   * Add support for disabling Transparent Hugepages for better MongoDB performance in operator mode
 * 1.6.5 - released on 2022-12-07

@@ -66,6 +66,14 @@ spec:
               runAsNonRoot: false
               runAsUser: 0
               runAsGroup: 0
+          - name: increase-rlimit
+            command: ["sh", "-c", "ulimit -n 64000"]
+            image: busybox
+            securityContext:
+              privileged: true
+              runAsNonRoot: false
+              runAsUser: 0
+              runAsGroup: 0
           {{- if .Values.database.operator.thp.disabled }}
           - name: disable-thp
             command: ["sh", "-c", "echo never >/host-sys/kernel/mm/transparent_hugepage/enabled"]

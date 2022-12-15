@@ -25,6 +25,8 @@ Install with:
 
 ### Supported versions
 
+* 1.6.11 - released on 2022-12-15
+  * Add ability to specify landing page health endpoint
 * 1.6.10 - released on 2022-12-08
   * Set ulimits to recommended values for MongoDB operator databases
 * 1.6.9 - released on 2022-12-07

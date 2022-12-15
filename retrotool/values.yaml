@@ -189,6 +189,7 @@ landingPage:
     - /privacy-policy
     - /contact-us
   deployment:
+    healthEndpoint: /healthz
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
